@@ -1,0 +1,20 @@
+installCRDs: true
+
+imageAutomationController:
+  enabled: false
+
+imageReflectionController:
+  enabled: false
+
+notificationController:
+  enabled: false
+
+sourceController:
+  enabled: true
+
+kustomizeController:
+  enabled: true
+
+helmController:
+  enabled: true
+

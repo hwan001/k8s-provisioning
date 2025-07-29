@@ -1,0 +1,47 @@
+repositories:
+  - name: istio
+    url: https://istio-release.storage.googleapis.com/charts
+  - name: fluxcd
+    url: https://fluxcd-community.github.io/helm-charts
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
+
+releases:
+  - name: istio-base
+    namespace: istio-system
+    chart: istio/base
+    labels:
+      tier: istio
+
+  - name: istiod
+    namespace: istio-system
+    chart: istio/istiod
+    values:
+      - values/istiod-values.yaml
+    labels:
+      tier: istio 
+
+  - name: ingress
+    namespace: istio-ingress
+    chart: istio/gateway
+    values:
+      - values/ingress-values.yaml
+    labels:
+      tier: istio
+
+  - name: flux
+    namespace: flux-system
+    chart: fluxcd/flux2
+    version: 2.10.0
+    values:
+      - values/flux-values.yaml
+    labels:
+      tier: fluxcd
+      
+  - name: metrics-server
+    namespace: kube-system
+    chart: metrics-server/metrics-server
+    values:
+      - values/metrics-server-values.yaml
+    labels:
+      tier: metrics-server

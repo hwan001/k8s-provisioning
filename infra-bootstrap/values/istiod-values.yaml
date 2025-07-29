@@ -1,0 +1,14 @@
+global:
+  istioNamespace: istio-system
+  proxy:
+    autoInject: enabled # sidecar 자동 주입
+
+meshConfig:
+  accessLogFile: /dev/stdout # Envoy 로그 출력 
+  enablePrometheusMerge: true
+
+pilot:
+  autoscaleEnabled: true # istiod HPA
+  autoscaleMin: 2
+  autoscaleMax: 5
+  

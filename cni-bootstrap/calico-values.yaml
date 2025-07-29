@@ -1,0 +1,7 @@
+installation:
+  enabled: true
+
+defaultFelixConfiguration:
+  enabled: false # true
+  # wireguardEnabled: true
+  # wireguardEnabledV6: true

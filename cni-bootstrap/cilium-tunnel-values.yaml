@@ -1,0 +1,27 @@
+kubeProxyReplacement: true # kube-proxy 대체
+routingMode: tunnel
+# autoDirectNodeRoutes: false 
+
+ipam:
+  mode: cluster-pool
+  operator:
+    clusterPoolIPv4PodCIDRList:
+      - 10.0.0.0/8
+
+k8sServiceHost: <kube-apiserver IP>
+k8sServicePort: 6443
+
+hubble:
+  enabled: true
+  ui:
+    enabled: true
+  relay:
+    enabled: true
+
+envoy:
+  affinity: {}
+  nodeSelector: {}
+
+operator:
+  replicas: 1
+
