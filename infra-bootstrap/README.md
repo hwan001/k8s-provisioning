@@ -1,8 +1,9 @@
 # Infra
 
-설치
 ```sh
-helmfile apply
-```
+helmfile diff --selector tier=metallb --log-level=debug
+helmfile apply --selector tier=metallb --log-level=debug
 
-- FluxCD는 fluxcd/flux2 Helm chart를 공식 Helm repo가 아닌 community repo에 따로 둠
+kubectl apply -n metallb-system -f config/metallb-config.yaml
+
+```

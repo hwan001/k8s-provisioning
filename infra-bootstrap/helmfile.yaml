@@ -5,6 +5,8 @@ repositories:
     url: https://fluxcd-community.github.io/helm-charts
   - name: metrics-server
     url: https://kubernetes-sigs.github.io/metrics-server/
+  - name: metallb
+    url: https://metallb.github.io/metallb
 
 releases:
   - name: istio-base
@@ -32,7 +34,7 @@ releases:
   - name: flux
     namespace: flux-system
     chart: fluxcd/flux2
-    version: 2.10.0
+    version: 2.6.4 # 2025-07-30
     values:
       - values/flux-values.yaml
     labels:
@@ -45,3 +47,23 @@ releases:
       - values/metrics-server-values.yaml
     labels:
       tier: metrics-server
+
+  - name: metallb
+    namespace: metallb-system
+    chart: metallb/metallb
+    version: 0.15.2 # 2025-07-30
+    createNamespace: true
+    values:
+      - values/metallb-values.yaml
+    labels:
+      tier: metallb
+    hooks:
+    - events: ["postApply"]
+      showlogs: true
+      command: "kubectl"
+      args:
+        - "apply"
+        - "-n"
+        - "metallb-system"
+        - "-f"
+        - "config/metallb-config.yaml"
