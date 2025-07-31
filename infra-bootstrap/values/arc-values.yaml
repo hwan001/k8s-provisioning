@@ -1,0 +1,13 @@
+githubWebhookServer:
+  enabled: false  # Webhook 서버 비활성화 (선택사항)
+
+authSecret:
+  create: false 
+  name: controller-manager 
+
+metrics:
+  enabled: true
+
+runner:
+  manager:
+    enabled: true

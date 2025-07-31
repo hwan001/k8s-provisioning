@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: harbor
+  namespace: istio-ingress
+spec:
+  hosts:
+    - harbor.k8s.avgmax.team
+  gateways:
+    - harbor-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: harbor-harbor-core.harbor-system.svc.cluster.local
+            port:
+              number: 80

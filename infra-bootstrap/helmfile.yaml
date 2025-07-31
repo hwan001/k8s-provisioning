@@ -7,6 +7,16 @@ repositories:
     url: https://kubernetes-sigs.github.io/metrics-server/
   - name: metallb
     url: https://metallb.github.io/metallb
+  - name: actions-runner-controller
+    url: https://actions-runner-controller.github.io/actions-runner-controller
+    labels:
+      tier: arc
+      managed-by: helmfile
+  - name: harbor
+    url: https://helm.goharbor.io
+    labels:
+      tier: registry
+      managed-by: helmfile
 
 releases:
   - name: istio-base
@@ -67,3 +77,25 @@ releases:
         - "metallb-system"
         - "-f"
         - "config/metallb-config.yaml"
+
+  - name: arc
+    namespace: actions-runner-system
+    chart: actions-runner-controller/actions-runner-controller
+    version: 0.12.0 # 2025-07-30  
+    createNamespace: true
+    values:
+      - values/arc-values.yaml
+    labels:
+      app: arc
+      type: controller
+
+  - name: harbor
+    namespace: harbor-system
+    chart: harbor/harbor
+    version: 1.17.0 # 2025-07-30
+    createNamespace: true
+    values:
+      - values/harbor-values.yaml
+    labels:
+      app: harbor
+      type: registry
