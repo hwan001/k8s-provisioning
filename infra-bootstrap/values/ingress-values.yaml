@@ -5,9 +5,17 @@ gateways:
       - port: 80
         name: http
         targetPort: 8080
-      - port: 443
-        name: https
-        targetPort: 8443
+    # ingressGateway:
+    #   enabled: true
+    #   servers:
+    #     - port:
+    #         number: 80
+    #         name: http
+    #         protocol: HTTP
+    #       hosts:
+    #         - "*.k8s.avgmax.team" 
+    containerPorts:
+      http: 8080
 
 autoscaling:
   enabled: true

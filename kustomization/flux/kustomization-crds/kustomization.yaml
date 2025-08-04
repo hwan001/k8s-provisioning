@@ -1,0 +1,4 @@
+resources:
+  - n8n-vs.yaml
+  - istio-gw.yaml
+  - n8n-ns.yaml

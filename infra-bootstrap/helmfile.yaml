@@ -9,21 +9,19 @@ repositories:
     url: https://metallb.github.io/metallb
   - name: actions-runner-controller
     url: https://actions-runner-controller.github.io/actions-runner-controller
-    labels:
-      tier: arc
-      managed-by: helmfile
   - name: harbor
     url: https://helm.goharbor.io
-    labels:
-      tier: registry
-      managed-by: helmfile
+  - name: n8n
+    url: https://community-charts.github.io/helm-charts
+  - name: kiali
+    url: https://kiali.org/helm-charts
 
 releases:
   - name: istio-base
     namespace: istio-system
     chart: istio/base
     labels:
-      tier: istio
+      app: istio
 
   - name: istiod
     namespace: istio-system
@@ -31,7 +29,7 @@ releases:
     values:
       - values/istiod-values.yaml
     labels:
-      tier: istio 
+      app: istio 
 
   - name: ingress
     namespace: istio-ingress
@@ -39,7 +37,7 @@ releases:
     values:
       - values/ingress-values.yaml
     labels:
-      tier: istio
+      app: istio
 
   - name: flux
     namespace: flux-system
@@ -48,7 +46,7 @@ releases:
     values:
       - values/flux-values.yaml
     labels:
-      tier: fluxcd
+      app: fluxcd
       
   - name: metrics-server
     namespace: kube-system
@@ -56,7 +54,7 @@ releases:
     values:
       - values/metrics-server-values.yaml
     labels:
-      tier: metrics-server
+      app: metrics-server
 
   - name: metallb
     namespace: metallb-system
@@ -66,7 +64,7 @@ releases:
     values:
       - values/metallb-values.yaml
     labels:
-      tier: metallb
+      app: metallb
     hooks:
     - events: ["postApply"]
       showlogs: true
@@ -87,7 +85,6 @@ releases:
       - values/arc-values.yaml
     labels:
       app: arc
-      type: controller
 
   - name: harbor
     namespace: harbor-system
@@ -98,4 +95,23 @@ releases:
       - values/harbor-values.yaml
     labels:
       app: harbor
-      type: registry
+
+  - name: n8n
+    namespace: n8n
+    chart: n8n/n8n
+    version: 1.5.11 # 2025-07-30
+    createNamespace: true
+    values:
+      - values/n8n-values.yaml
+    labels:
+      app: n8n
+      istio-injection: "enabled"
+
+  - name: kiali
+    namespace: istio-system
+    chart: kiali/kiali-server
+    createNamespace: true
+    values:
+      - values/kiali-values.yaml
+    labels:
+      app: kiali
