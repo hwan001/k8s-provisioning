@@ -1,11 +1,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: harbor
-  namespace: istio-ingress
+  name: arc
+  namespace: actions-runner-system
 spec:
   hosts:
-    - harbor.avgmax.team
+    - arc.avgmax.team 
   gateways:
     - istio-gateway
   http:
@@ -14,6 +14,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: harbor.harbor-system.svc.cluster.local
+            host: actions-runner-controller-webhook.actions-runner-system.svc.cluster.local
             port:
-              number: 80
+              number: 443

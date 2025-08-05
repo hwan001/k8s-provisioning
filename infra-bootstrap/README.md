@@ -17,3 +17,7 @@ kubectl create secret generic controller-manager \
   --from-literal=github_token=<YOUR_TOKEN>
 ```
 
+- cert-manager CRD 수동 설치
+```sh
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.crds.yaml
+```

@@ -1,23 +1,19 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: n8n
+  name: kiali
   namespace: istio-ingress
 spec:
   hosts:
-    - n8n.avgmax.team # 여기는 Istio Gateway가 decription한 http url로 비교함
+    - kiali.avgmax.team
   gateways:
     - istio-gateway
   http:
     - match:
         - uri:
             prefix: /
-      headers:
-        request:
-          add:
-            X-Forwarded-Proto: "https"
       route:
         - destination:
-            host: n8n.n8n.svc.cluster.local
+            host: kiali.istio-system.svc.cluster.local
             port:
-              number: 5678
+              number: 20001

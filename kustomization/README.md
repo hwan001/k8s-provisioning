@@ -35,3 +35,22 @@ kubectl rollout restart deployment -n n8n
 # core dns 리스타트
 kubectl rollout restart deployment coredns -n kube-system
 ```
+
+```bash
+# istio 인증서 발급 (istio-gw랑 같은 namespace)
+kubectl -n istio-ingress get secret istio-ingress-avgmax-cert
+
+# 인증서 생성
+kubectl create -n istio-ingress secret tls istio-ingress-avgmax-cert \
+  --cert=avgmax.pem \
+  --key=avgmax.key
+
+# 인증서 업데이트
+kubectl -n istio-ingress create secret tls istio-ingress-avgmax-cert \
+  --cert=your-updated-cert.pem \
+  --key=your-updated-key.key \
+  --dry-run=client -o yaml | kubectl apply -f -
+
+# 재시작
+kubectl rollout restart deployment ingress -n istio-ingress
+```

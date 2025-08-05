@@ -1,7 +1,12 @@
-externalURL: https://harbor.k8s.avgmax.team
+externalURL: https://harbor.avgmax.team
 
 expose:
-  type: clusterIP 
+  type: clusterIP
+  tls:
+    enabled: false # true # istio랑 중복처리됨
+    #secretName: istio-ingress-avgmax-cert
+    auto:
+      commonName: harbor.avgmax.team
 
 harborAdminPassword: "Harbor12345"
 
@@ -9,19 +14,24 @@ persistence:
   enabled: true
   persistentVolumeClaim:
     registry:
-      size: 20Gi
-    jobservice:
-      size: 1Gi
-    database:
       size: 5Gi
-    redis:
-      size: 1Gi
+      storageClass: local-storage
     trivy:
       size: 5Gi
-
-database:
-  internal:
-    password: "changeit_"
+      storageClass: local-storage
+    database:
+      size: 1Gi
+      storageClass: local-storage
+    redis:
+      size: 1Gi
+      storageClass: local-storage
+    jobservice:
+      jobLog:
+        size: 1Gi
+        storageClass: local-storage
 
 trivy:
   enabled: true
+
+jobservice:
+  enabled: true  # Trivy 등 백그라운드 작업 처리를 위해 필요

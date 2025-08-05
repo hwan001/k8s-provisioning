@@ -1,7 +1,7 @@
 repositories:
   - name: istio
     url: https://istio-release.storage.googleapis.com/charts
-  - name: fluxcd
+  - name: fluxcd-community
     url: https://fluxcd-community.github.io/helm-charts
   - name: metrics-server
     url: https://kubernetes-sigs.github.io/metrics-server/
@@ -15,6 +15,8 @@ repositories:
     url: https://community-charts.github.io/helm-charts
   - name: kiali
     url: https://kiali.org/helm-charts
+  - name: jetstack
+    url: https://charts.jetstack.io
 
 releases:
   - name: istio-base
@@ -29,7 +31,7 @@ releases:
     values:
       - values/istiod-values.yaml
     labels:
-      app: istio 
+      app: istio
 
   - name: ingress
     namespace: istio-ingress
@@ -41,13 +43,13 @@ releases:
 
   - name: flux
     namespace: flux-system
-    chart: fluxcd/flux2
-    version: 2.6.4 # 2025-07-30
+    chart: fluxcd-community/flux2
+    version: 2.16.3 # 2025-07-30
     values:
       - values/flux-values.yaml
     labels:
       app: fluxcd
-      
+
   - name: metrics-server
     namespace: kube-system
     chart: metrics-server/metrics-server
@@ -56,6 +58,16 @@ releases:
     labels:
       app: metrics-server
 
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: v1.14.3
+    createNamespace: true
+    values:
+      - values/cert-manager-values.yaml
+    labels:
+      app: cert-manager
+      
   - name: metallb
     namespace: metallb-system
     chart: metallb/metallb
@@ -66,30 +78,32 @@ releases:
     labels:
       app: metallb
     hooks:
-    - events: ["postApply"]
-      showlogs: true
-      command: "kubectl"
-      args:
-        - "apply"
-        - "-n"
-        - "metallb-system"
-        - "-f"
-        - "config/metallb-config.yaml"
+      - events: ["postApply"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-n"
+          - "metallb-system"
+          - "-f"
+          - "config/metallb-config.yaml"
 
   - name: arc
     namespace: actions-runner-system
     chart: actions-runner-controller/actions-runner-controller
-    version: 0.12.0 # 2025-07-30  
+    version: 0.23.7 # 2025-08-05
     createNamespace: true
     values:
       - values/arc-values.yaml
     labels:
       app: arc
+    needs:
+      - cert-manager/cert-manager
 
   - name: harbor
     namespace: harbor-system
     chart: harbor/harbor
-    version: 1.17.0 # 2025-07-30
+    version: 1.17.1 # 2025-08-05
     createNamespace: true
     values:
       - values/harbor-values.yaml

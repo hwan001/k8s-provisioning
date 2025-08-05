@@ -1,0 +1,4 @@
+resources:
+  - arc-vs.yaml
+  - arc-runner.yaml
+  - harbor-pv.yaml

@@ -7,9 +7,12 @@ spec:
   selector:
     istio: ingress
   servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "*.k8s.avgmax.team"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - "*" # TLS Termination 이전의 SNI 필드와 비교
+      tls: # HTTPS인데 tls 설정이 없으면 istio gw에서 value가 무시됨
+        mode: SIMPLE
+        credentialName: istio-ingress-avgmax-cert

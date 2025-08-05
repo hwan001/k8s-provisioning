@@ -1,0 +1,7 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: Runner
+metadata:
+  name: my-runner
+  namespace: actions-runner-system
+spec:
+  repository: hwan001/testmd
