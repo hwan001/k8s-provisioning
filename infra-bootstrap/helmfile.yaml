@@ -58,15 +58,15 @@ releases:
     labels:
       app: metrics-server
 
-  - name: cert-manager
-    namespace: cert-manager
-    chart: jetstack/cert-manager
-    version: v1.14.3
-    createNamespace: true
-    values:
-      - values/cert-manager-values.yaml
-    labels:
-      app: cert-manager
+  # - name: cert-manager
+  #   namespace: cert-manager
+  #   chart: jetstack/cert-manager
+  #   version: v1.14.3
+  #   createNamespace: true
+  #   values:
+  #     - values/cert-manager-values.yaml
+  #   labels:
+  #     app: cert-manager
       
   - name: metallb
     namespace: metallb-system
@@ -88,17 +88,17 @@ releases:
           - "-f"
           - "config/metallb-config.yaml"
 
-  - name: arc
-    namespace: actions-runner-system
-    chart: actions-runner-controller/actions-runner-controller
-    version: 0.23.7 # 2025-08-05
-    createNamespace: true
-    values:
-      - values/arc-values.yaml
-    labels:
-      app: arc
-    needs:
-      - cert-manager/cert-manager
+  # - name: arc
+  #   namespace: actions-runner-system
+  #   chart: actions-runner-controller/actions-runner-controller
+  #   version: 0.23.7 # 2025-08-05
+  #   createNamespace: true
+  #   values:
+  #     - values/arc-values.yaml
+  #   labels:
+  #     app: arc
+  #   needs:
+  #     - cert-manager/cert-manager
 
   - name: harbor
     namespace: harbor-system
