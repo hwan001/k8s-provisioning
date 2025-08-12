@@ -62,5 +62,5 @@ kubectl rollout restart deployment ingress -n istio-ingress
 kubectl -n testrtc create secret docker-registry harbor-creds \
   --docker-server=harbor.avgmax.team \
   --docker-username='admin' \
-  --docker-password=PASSWORD' \
+  --docker-password=PASSWORD'
 ```
