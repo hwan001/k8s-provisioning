@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testrtc-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testrtc-fe
+  template:
+    metadata:
+      labels:
+        app: testrtc-fe
+    spec:
+      containers:
+      - name: testrtc-fe
+        image: harbor.avgmax.team/testrtc/fe:fe-v0.0.0
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: harbor-creds
+      

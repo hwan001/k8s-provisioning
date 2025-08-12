@@ -1,4 +1,5 @@
 resources:
-  - f12mall/deployment.yaml
-  - f12mall/service.yaml
-  - f12mall/f12mall-vs.yaml
+  # - f12mall/deployment.yaml
+  # - f12mall/service.yaml
+  # - f12mall/f12mall-vs.yaml
+  - testrtc/deployment.yaml
