@@ -1,0 +1,29 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: testrtc
+  namespace: testrtc
+spec:
+  hosts:
+  - testrtc.avgmax.team
+  gateways:
+  - istio-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: backend.testrtc.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: frontend.testrtc.svc.cluster.local
+        port:
+          number: 3000

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testrtc-be
+  namespace: testrtc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testrtc-be
+  template:
+    metadata:
+      labels:
+        app: testrtc-be
+    spec:
+      containers:
+      - name: testrtc-be
+        image: harbor.avgmax.team/testrtc/be:be-v0.0.0
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: harbor-creds
+      

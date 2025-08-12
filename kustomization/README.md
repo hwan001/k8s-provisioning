@@ -54,3 +54,13 @@ kubectl -n istio-ingress create secret tls istio-ingress-avgmax-cert \
 # 재시작
 kubectl rollout restart deployment ingress -n istio-ingress
 ```
+
+
+### secret
+```
+# harbor-cred
+kubectl -n testrtc create secret docker-registry harbor-creds \
+  --docker-server=harbor.avgmax.team \
+  --docker-username='admin' \
+  --docker-password=PASSWORD' \
+```
