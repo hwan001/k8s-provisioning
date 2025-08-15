@@ -1,0 +1,32 @@
+# values/oauth2-proxy.yaml
+config:
+  existingSecret: oauth2-proxy-secret  # client secret, cookie-secret을 시크릿로 관리
+  # 시크릿 키들:
+  # OAUTH2_PROXY_CLIENT_ID
+  # OAUTH2_PROXY_CLIENT_SECRET
+  # OAUTH2_PROXY_COOKIE_SECRET (32바이트 base64)
+
+extraArgs:
+  # OAuth2 공급자/리다이렉트
+  provider: google
+  cookie-secure: "true"
+  cookie-samesite: lax
+  email-domain: "*"
+  reverse-proxy: "true"
+  skip-provider-button: "true"
+  # 인증 체크 엔드포인트
+  upstream: "file:///dev/null"
+  # 쿠키 도메인/리다이렉트 URL은 환경에 맞춰 수정
+  redirect-url: "https://your-protected.example.com/oauth2/callback"
+  whitelist-domain: ".example.com"
+  set-xauthrequest: "true"   # 업스트림으로 사용자 정보 헤더 전달
+
+service:
+  type: ClusterIP
+  portNumber: 4180
+
+# (선택) Pod 리소스
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi

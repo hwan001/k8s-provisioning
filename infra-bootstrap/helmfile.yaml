@@ -17,6 +17,8 @@ repositories:
     url: https://kiali.org/helm-charts
   - name: jetstack
     url: https://charts.jetstack.io
+  - name: oauth2-proxy
+    url: https://oauth2-proxy.github.io/manifests
 
 releases:
   - name: istio-base
@@ -129,3 +131,10 @@ releases:
       - values/kiali-values.yaml
     labels:
       app: kiali
+
+  - name: oauth2-proxy
+    namespace: infra
+    chart: oauth2-proxy/oauth2-proxy
+    version: 7.18.0 # 2025-08-15
+    values:
+      - values/oauth2-proxy.yaml

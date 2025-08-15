@@ -4,3 +4,12 @@ metadata:
   name: n8n
   labels:
     istio-injection: enabled
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: n8n
+spec:
+  mtls:
+    mode: STRICT
