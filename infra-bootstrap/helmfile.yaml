@@ -44,7 +44,7 @@ releases:
   - name: flux
     namespace: flux-system
     chart: fluxcd-community/flux2
-    version: 2.16.3 # 2025-07-30
+    version: 2.16.4 # 2025-08-20
     values:
       - values/flux-values.yaml
     labels:
