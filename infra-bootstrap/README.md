@@ -21,3 +21,11 @@ kubectl create secret generic controller-manager \
 ```sh
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.crds.yaml
 ```
+
+- oauth secret
+```sh
+kubectl -n infra create secret generic oauth2-proxy-secret \
+  --from-literal=OAUTH2_PROXY_CLIENT_ID='<google-client-id>' \
+  --from-literal=OAUTH2_PROXY_CLIENT_SECRET='<google-client-secret>' \
+  --from-literal=OAUTH2_PROXY_COOKIE_SECRET='base64-32bytes-secret'
+```

@@ -4,3 +4,23 @@ metadata:
   name: harbor-system
   labels:
     istio-injection: enabled
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: harbor-system
+spec:
+  mtls:
+    mode: PERMISSIVE # STRICT
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: harbor-mtls
+  namespace: istio-ingress 
+spec:
+  host: harbor.harbor-system.svc.cluster.local # namespace가 STRICT이므로 모든 파드에 사이드카 주입 및 ISTIO_MUTUAL 있어야 내부 통신됨)
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
