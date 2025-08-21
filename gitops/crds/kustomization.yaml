@@ -1,0 +1,5 @@
+resources:
+  - n8n/*.yaml
+  - istio/istio-gw.yaml
+  - kiali/kiali-vs.yaml
+  - harbor/*.yaml 

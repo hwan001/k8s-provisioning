@@ -1,9 +1,0 @@
-resources:
-  - n8n-vs.yaml
-  - istio-gw.yaml
-  - n8n-ns.yaml
-  - kiali-vs.yaml
-  - harbor-vs.yaml
-  - harbor-sc.yaml
-  - harbor-ns.yaml
-  - harbor-pv.yaml
