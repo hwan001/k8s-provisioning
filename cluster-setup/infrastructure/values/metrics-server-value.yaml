@@ -3,7 +3,6 @@ replicaCount: 1
 args:
   - --kubelet-insecure-tls
   - --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP
-
 resources:
   requests:
     cpu: 100m

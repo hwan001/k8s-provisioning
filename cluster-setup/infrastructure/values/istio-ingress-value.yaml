@@ -1,0 +1,14 @@
+service:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      name: http
+      targetPort: 8080
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+
+labels:
+  istio: ingress

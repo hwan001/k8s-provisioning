@@ -1,5 +1,6 @@
 global:
   istioNamespace: istio-system
+  configValidation: true 
   proxy:
     autoInject: enabled # sidecar 자동 주입
 
@@ -11,4 +12,7 @@ pilot:
   autoscaleEnabled: true # istiod HPA
   autoscaleMin: 2
   autoscaleMax: 5
-  
+  configValidation: true # Istio Validating Webhook 활성화
+  enableAnalysis: true # Istio 분석 기능 활성화
+  env:
+    ENABLE_VALIDATION: "true"

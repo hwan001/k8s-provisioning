@@ -1,0 +1,15 @@
+alertmanager:
+  enabled: false
+
+pushgateway:
+  enabled: false
+
+server:
+  service:
+    type: ClusterIP
+    port: 9090
+  persistentVolume:
+    enabled: false
+
+rbac:
+  create: true

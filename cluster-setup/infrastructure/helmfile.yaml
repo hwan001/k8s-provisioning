@@ -31,7 +31,7 @@ releases:
     namespace: istio-system
     chart: istio/istiod
     values:
-      - values/istiod-values.yaml
+      - values/istiod-value.yaml
     labels:
       app: istio
 
@@ -39,7 +39,15 @@ releases:
     namespace: istio-ingress
     chart: istio/gateway
     values:
-      - values/ingress-values.yaml
+      - values/istio-ingress-value.yaml
+    labels:
+      app: istio
+
+  - name: vpn-ingress
+    namespace: istio-ingress
+    chart: istio/gateway
+    values:
+      - values/istio-vpn-ingress-value.yaml
     labels:
       app: istio
 
@@ -48,7 +56,7 @@ releases:
     chart: fluxcd-community/flux2
     version: 2.16.4 # 2025-08-20
     values:
-      - values/flux-values.yaml
+      - values/flux-value.yaml
     labels:
       app: fluxcd
 
@@ -56,7 +64,7 @@ releases:
     namespace: kube-system
     chart: metrics-server/metrics-server
     values:
-      - values/metrics-server-values.yaml
+      - values/metrics-server-value.yaml
     labels:
       app: metrics-server
 
@@ -66,7 +74,7 @@ releases:
   #   version: v1.14.3
   #   createNamespace: true
   #   values:
-  #     - values/cert-manager-values.yaml
+  #     - values/cert-manager-value.yaml
   #   labels:
   #     app: cert-manager
       
@@ -76,7 +84,7 @@ releases:
     version: 0.15.2 # 2025-07-30
     createNamespace: true
     values:
-      - values/metallb-values.yaml
+      - values/metallb-value.yaml
     labels:
       app: metallb
     hooks:
@@ -96,7 +104,7 @@ releases:
   #   version: 0.23.7 # 2025-08-05
   #   createNamespace: true
   #   values:
-  #     - values/arc-values.yaml
+  #     - values/arc-value.yaml
   #   labels:
   #     app: arc
   #   needs:
@@ -108,7 +116,7 @@ releases:
     version: 1.17.1 # 2025-08-05
     createNamespace: true
     values:
-      - values/harbor-values.yaml
+      - values/harbor-value.yaml
     labels:
       app: harbor
 
@@ -118,7 +126,7 @@ releases:
     version: 1.5.11 # 2025-07-30
     createNamespace: true
     values:
-      - values/n8n-values.yaml
+      - values/n8n-value.yaml
     labels:
       app: n8n
       istio-injection: "enabled"
@@ -128,13 +136,23 @@ releases:
     chart: kiali/kiali-server
     createNamespace: true
     values:
-      - values/kiali-values.yaml
+      - values/kiali-value.yaml
     labels:
       app: kiali
 
-  - name: oauth2-proxy
-    namespace: infra
-    chart: oauth2-proxy/oauth2-proxy
-    version: 7.18.0 # 2025-08-15
+  # - name: oauth2-proxy
+  #   namespace: infra
+  #   chart: oauth2-proxy/oauth2-proxy
+  #   version: 7.18.0 # 2025-08-15
+  #   values:
+  #     - values/oauth2-proxy-value.yaml
+
+  - name: prometheus
+    namespace: prometheus-system
+    chart: prometheus-community/prometheus
+    version: 25.25.0 # 2025-10-27
+    createNamespace: true
     values:
-      - values/oauth2-proxy.yaml
+      - values/prometheus-value.yaml
+    labels:
+      app: prometheus

@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: kiali
+  name: prometheus-vs
   namespace: istio-ingress
 spec:
   hosts:
@@ -11,9 +11,11 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /kiali
+            prefix: /prometheus
+      rewrite: # dashboard 접속을 위해 /prometheus 제거
+        uri: / 
       route:
         - destination:
-            host: kiali.istio-system.svc.cluster.local
+            host: prometheus-server.prometheus-system.svc.cluster.local
             port:
-              number: 20001
+              number: 80

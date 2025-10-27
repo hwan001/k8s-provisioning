@@ -3,5 +3,5 @@ auth:
 
 deployment:
   ingress:
-    enabled: true
+    enabled: false
     
