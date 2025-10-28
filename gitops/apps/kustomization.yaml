@@ -1,9 +1,2 @@
 resources:
-  # - f12mall/deployment.yaml
-  # - f12mall/service.yaml
-  # - f12mall/f12mall-vs.yaml
-  - testrtc/namespace.yaml
-  - testrtc/fe-deployment.yaml
-  - testrtc/be-deployment.yaml
-  - testrtc/service.yaml
-  - testrtc/vs.yaml
+  - testrtc

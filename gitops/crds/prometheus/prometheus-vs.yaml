@@ -11,9 +11,14 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /prometheus
-      rewrite: # dashboard 접속을 위해 /prometheus 제거
-        uri: / 
+            exact: /prometheus
+      redirect:
+        uri: /prometheus/
+    - match:
+        - uri:
+            prefix: /prometheus/
+      rewrite:
+        uri: /
       route:
         - destination:
             host: prometheus-server.prometheus-system.svc.cluster.local

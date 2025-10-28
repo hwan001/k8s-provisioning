@@ -30,26 +30,28 @@ releases:
   - name: istiod
     namespace: istio-system
     chart: istio/istiod
-    values:
-      - values/istiod-value.yaml
     labels:
       app: istio
+    values:
+      - values/istiod-value.yaml
 
   - name: ingress
     namespace: istio-ingress
     chart: istio/gateway
+    labels:
+      app: istio-ingress
+      role: https
     values:
       - values/istio-ingress-value.yaml
-    labels:
-      app: istio
-
+    
   - name: vpn-ingress
     namespace: istio-ingress
     chart: istio/gateway
+    labels:
+      app: istio-ingress
+      role: vpn
     values:
       - values/istio-vpn-ingress-value.yaml
-    labels:
-      app: istio
 
   - name: flux
     namespace: flux-system

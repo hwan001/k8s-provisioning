@@ -6,6 +6,8 @@ metadata:
 spec:
   addresses:
     - 192.168.11.240-192.168.11.250  # 사용할 VIP 범위
+  autoAssign: true
+  avoidBuggyIPs: true   # camelCase
 
 ---
 apiVersion: metallb.io/v1beta1
@@ -16,3 +18,5 @@ metadata:
 spec:
   ipAddressPools:
     - default-pool
+  interfaces:
+    - ens18

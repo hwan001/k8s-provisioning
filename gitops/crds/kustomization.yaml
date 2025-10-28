@@ -2,10 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - n8n/n8n-ns.yaml
-  - n8n/n8n-vs.yaml
+  - n8n
   - istio/istio-gw.yaml
   - istio/istio-vpn-gw.yaml
   - kiali/kiali-vs.yaml
   - harbor
-  - prometheus/prometheus-vs.yaml
+  - prometheus

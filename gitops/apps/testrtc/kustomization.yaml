@@ -1,0 +1,6 @@
+resources:
+  - namespace.yaml
+  - fe-deployment.yaml
+  - be-deployment.yaml
+  - service.yaml
+  - vs.yaml

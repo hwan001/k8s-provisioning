@@ -10,6 +10,20 @@ server:
     port: 9090
   persistentVolume:
     enabled: false
+  extraArgs:
+    web.route-prefix: /
+    web.external-url: /prometheus
+  podAnnotations:
+    sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: 9090
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: 9090
 
 rbac:
   create: true

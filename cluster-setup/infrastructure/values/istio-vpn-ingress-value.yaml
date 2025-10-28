@@ -1,17 +1,9 @@
-# service:
-#   type: LoadBalancer
-#   ports:
-#     - port: 8080
-#       name: http-vpn
-#       targetPort: 8080
-
 service:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 8080
       name: http-vpn
       targetPort: 8080
-      nodePort: 30080  # 예시로 고정
 
 autoscaling:
   enabled: true

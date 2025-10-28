@@ -9,6 +9,8 @@ helmfile apply --selector app=prometheus --log-level=debug
 
 kubectl apply -n metallb-system -f config/metallb-config.yaml
 
+helmfile -l app=istio sync
+
 ```
 
 
