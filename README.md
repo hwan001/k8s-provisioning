@@ -1,5 +1,38 @@
 # k8s provisioning 
 
+### Network Architecture (L7)
+
+```mermaid
+graph TD
+    subgraph cluster["k8s cluster"]
+        subgraph ubuntu1["ubuntu"]
+            ubuntu1_interface["eth0 interface"]
+            ubuntu1_vpn_interface["vpn interface"]
+            ubuntu1_iptables["iptables"]
+            subgraph nodeC1["control1"]
+                nodeC1_metallb["metallb"]
+                nodeC1_istio_ingress["istio GW"]
+                nodeC1_istio_vpn_ingress["istio VPN GW"]
+            end
+            ubuntu1_vpn_interface --> ubuntu1_iptables
+            ubuntu1_interface --VIP--> nodeC1_istio_ingress
+            ubuntu1_iptables --VIP--> nodeC1_istio_vpn_ingress
+        end
+        subgraph ubuntu2["ubuntu"]
+            subgraph nodeD1["data1"]
+            end
+        end
+
+        nodeC1_istio_ingress --mesh--> nodeD1
+        nodeC1_istio_vpn_ingress --mesh--> nodeD1
+    end
+
+    External_traffic --https--> ubuntu1_interface
+    Internal_traffic --vpn(http)--> ubuntu1_vpn_interface
+    
+```
+
+
 ### cluster-setup
 - infrastructure
     - helmfile 기반 구성
