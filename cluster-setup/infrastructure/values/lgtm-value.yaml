@@ -1,0 +1,62 @@
+grafana:
+  enabled: true
+  adminUser: admin
+  adminPassword: "changeme"
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClassName: local-storage
+  grafana.ini:
+    server:
+      root_url: /grafana
+      serve_from_sub_path: true
+
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 50Gi
+  gateway:
+    enabled: true
+    service:
+      type: ClusterIP
+
+tempo:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 20Gi
+  gateway:
+    enabled: true
+
+mimir:
+  enabled: false
+
+alloy:
+  enabled: true
+  logs:
+    enabled: true
+  metrics:
+    enabled: true
+  traces:
+    enabled: true
+
+ingress:
+  enabled: false
+
+additionalDataSources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus-server.prometheus-system.svc.cluster.local
+
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://lgtm-loki-query-frontend.monitoring-system.svc.cluster.local:3100
+    isDefault: true
+
+  - name: Tempo
+    type: tempo
+    access: proxy
+    url: http://lgtm-tempo-query-frontend.monitoring-system.svc.cluster.local:3100

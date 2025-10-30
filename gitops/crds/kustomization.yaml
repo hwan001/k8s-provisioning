@@ -8,3 +8,4 @@ resources:
   - kiali/kiali-vs.yaml
   - harbor
   - prometheus
+  - lgtm

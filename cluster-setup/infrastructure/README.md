@@ -33,3 +33,7 @@ kubectl -n infra create secret generic oauth2-proxy-secret \
   --from-literal=OAUTH2_PROXY_CLIENT_SECRET='<google-client-secret>' \
   --from-literal=OAUTH2_PROXY_COOKIE_SECRET='base64-32bytes-secret'
 ```
+
+
+### grafana
+- 15661 -> k8s dashboard (https://grafana.com/grafana/dashboards/15661-k8s-dashboard-en-20250125/)

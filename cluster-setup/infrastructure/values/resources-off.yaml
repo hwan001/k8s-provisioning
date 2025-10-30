@@ -1,0 +1,15 @@
+resources: {}
+server:
+  resources: {}
+alertmanager:
+  resources: {}
+core:
+  resources: {}
+portal:
+  resources: {}
+registry:
+  resources: {}
+jobservice:
+  resources: {}
+grafana:
+  resources: {}

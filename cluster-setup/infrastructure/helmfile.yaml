@@ -19,6 +19,8 @@ repositories:
     url: https://charts.jetstack.io
   - name: oauth2-proxy
     url: https://oauth2-proxy.github.io/manifests
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
 
 releases:
   - name: istio-base
@@ -119,6 +121,7 @@ releases:
     createNamespace: true
     values:
       - values/harbor-value.yaml
+      - values/resources-off.yaml
     labels:
       app: harbor
 
@@ -156,5 +159,17 @@ releases:
     createNamespace: true
     values:
       - values/prometheus-value.yaml
+      - values/resources-off.yaml
     labels:
       app: prometheus
+  
+  - name: lgtm
+    namespace: monitoring-system
+    chart: grafana/lgtm-distributed
+    version: 2.1.0
+    createNamespace: true
+    values:
+      - values/lgtm-value.yaml
+      - values/resources-off.yaml
+    labels:
+      app: lgtm

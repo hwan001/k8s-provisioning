@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: lgtm-vs
+  namespace: istio-ingress
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-vpn-gateway
+  http:
+    - match: [{ uri: { prefix: /grafana } }]
+      # rewrite: { uri: / }
+      route:
+        - destination: { host: lgtm-grafana.monitoring-system.svc.cluster.local, port: { number: 80 } }
