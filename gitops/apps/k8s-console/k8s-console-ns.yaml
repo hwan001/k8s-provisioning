@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-console
+  labels:
+    istio-injection: enabled
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: k8s-console
+spec:
+  mtls:
+    mode: STRICT # PERMISSIVE
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: k8s-console-mtls
+  namespace: istio-ingress 
+spec:
+  host: "fe.k8s-console.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: k8s-console-mtls
+  namespace: k8s-console
+spec:
+  host: "*.k8s-console.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
