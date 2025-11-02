@@ -1,21 +1,75 @@
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits: {}
+
 server:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 alertmanager:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 core:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 portal:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 registry:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 jobservice:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 grafana:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 loki:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 tempo:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}
+
 mimir:
-  resources: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits: {}

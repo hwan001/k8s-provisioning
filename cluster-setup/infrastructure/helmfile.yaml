@@ -1,3 +1,8 @@
+environments:
+  default:
+    values:
+      - values/resources-off.yaml
+--- 
 repositories:
   - name: istio
     url: https://istio-release.storage.googleapis.com/charts
@@ -21,6 +26,8 @@ repositories:
     url: https://oauth2-proxy.github.io/manifests
   - name: grafana
     url: https://grafana.github.io/helm-charts
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
 
 releases:
   - name: istio-base
@@ -121,7 +128,6 @@ releases:
     createNamespace: true
     values:
       - values/harbor-value.yaml
-      - values/resources-off.yaml
     labels:
       app: harbor
 
@@ -159,7 +165,6 @@ releases:
     createNamespace: true
     values:
       - values/prometheus-value.yaml
-      - values/resources-off.yaml
     labels:
       app: prometheus
   
@@ -170,6 +175,5 @@ releases:
     createNamespace: true
     values:
       - values/lgtm-value.yaml
-      - values/resources-off.yaml
     labels:
       app: lgtm
