@@ -1,2 +1,3 @@
 resources:
   - testrtc
+  - k8s-console

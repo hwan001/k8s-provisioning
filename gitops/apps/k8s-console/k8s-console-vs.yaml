@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: k8s-console
+  namespace: istio-ingress
+spec:
+  hosts:
+    - k8s-console.avgmax.team
+  gateways:
+    - istio-gateway
+  http:
+    # /api -> be 서비스로 라우팅
+    - match:
+        - uri:
+            prefix: /api
+      route:
+        - destination:
+            host: be.k8s-console.svc.cluster.local
+            port:
+              number: 8080
+      # rewrite:
+      #   uri: /api  # (optional) 실제 BE 경로와 동일하면 생략 가능
+
+    # 나머지 모든 경로 -> fe 서비스로 라우팅
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: fe.k8s-console.svc.cluster.local
+            port:
+              number: 3000

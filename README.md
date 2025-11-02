@@ -1,4 +1,4 @@
-# k8s provisioning 
+# k8s provisioning
 
 ### Network Architecture (L7)
 

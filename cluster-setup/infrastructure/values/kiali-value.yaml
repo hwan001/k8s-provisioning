@@ -1,7 +1,29 @@
 auth:
-  strategy: anonymous
-
+  strategy: anonymous   # 인증 비활성화 (VPN 내부 접근만 가능하므로 안전)
+  
 deployment:
   ingress:
-    enabled: false
-    
+    enabled: false      # Istio Gateway 통해 접근 예정
+  view_only_mode: false
+  accessible_namespaces:
+    - '**'              # 모든 네임스페이스 메트릭 보기 가능
+  pod_annotations: {}
+  service_annotations: {}
+
+external_services:
+  prometheus:
+    url: "http://prometheus-server.prometheus-system.svc.cluster.local:80"
+
+  grafana:
+    enabled: true
+    # Grafana 내부 서비스 URL (LGTM 내 Grafana)
+    url: "http://lgtm-grafana.monitoring-system.svc.cluster.local"
+    in_cluster_url: "http://lgtm-grafana.monitoring-system.svc.cluster.local"
+    dashboards:
+      - name: "Istio Workload Dashboard"
+        variables:
+          namespace: "var-namespace"
+          workload: "var-workload"
+      - name: "Istio Mesh Dashboard"
+        variables:
+          namespace: "var-namespace"

@@ -13,3 +13,9 @@ jobservice:
   resources: {}
 grafana:
   resources: {}
+loki:
+  resources: {}
+tempo:
+  resources: {}
+mimir:
+  resources: {}
