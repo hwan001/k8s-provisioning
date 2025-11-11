@@ -1,6 +1,6 @@
 # k8s provisioning
 
-### Network Architecture (L7)
+### Network architecture
 
 ```mermaid
 graph TD
@@ -29,9 +29,7 @@ graph TD
 
     External_traffic --https--> ubuntu1_interface
     Internal_traffic --vpn(http)--> ubuntu1_vpn_interface
-    
 ```
-
 
 ### cluster-setup
 - infrastructure

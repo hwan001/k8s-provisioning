@@ -12,7 +12,7 @@ grafana:
       serve_from_sub_path: true
 
 loki:
-  enabled: true
+  enabled: false
   persistence:
     enabled: true
     size: 50Gi
@@ -22,7 +22,7 @@ loki:
       type: ClusterIP
 
 tempo:
-  enabled: true
+  enabled: false
   persistence:
     enabled: true
     size: 20Gi
@@ -50,13 +50,13 @@ additionalDataSources:
     access: proxy
     url: http://prometheus-server.prometheus-system.svc.cluster.local
 
-  - name: Loki
-    type: loki
-    access: proxy
-    url: http://lgtm-loki-query-frontend.monitoring-system.svc.cluster.local:3100
-    isDefault: true
+  # - name: Loki
+  #   type: loki
+  #   access: proxy
+  #   url: http://lgtm-loki-query-frontend.monitoring-system.svc.cluster.local:3100
+  #   isDefault: true
 
-  - name: Tempo
-    type: tempo
-    access: proxy
-    url: http://lgtm-tempo-query-frontend.monitoring-system.svc.cluster.local:3100
+  # - name: Tempo
+  #   type: tempo
+  #   access: proxy
+  #   url: http://lgtm-tempo-query-frontend.monitoring-system.svc.cluster.local:3100
